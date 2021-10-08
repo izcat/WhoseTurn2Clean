@@ -42,8 +42,8 @@ jobs:
       - name: Send mail
         uses: dawidd6/action-send-mail@master
         with:
-          serveraddress: smtp.sina.com
-          serverport: 25
+          server_address: smtp.sina.com
+          server_port: 25
           username: zongeek@sina.com
           password: ${{ secrets.EMAIL_KEY }}
           subject: 【832睡眠体验研究中心重要通知】
