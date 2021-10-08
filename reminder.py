@@ -70,6 +70,10 @@ def autoRun():
 	
 	# 发送邮件提醒
 	sendMsg(index)
+	with open('message.txt', 'w') as f:
+		f.write(【饮茶小助手提示您】：今日卫生值班是%d号%s" % (idReminded, nameReminded))
+	with open('mail.txt', 'w') as f:
+		f.write(emails[index])
 	
 	# 保存今天信息
 	saveFile(ids[index])
