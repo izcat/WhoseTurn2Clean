@@ -8,12 +8,12 @@ names = [item['name'] for item in allInfo]
 emails = [item['email'] for item in allInfo]
 id_index = {allInfo[o]['id']:o for o in range(len(allInfo))}
 
-EMAIL_KEY = 'xxxxxxx'
+
 emailKey = 'xxxxxxx'
-# 如果检测到程序在 Github Actions 内运行，那么读取环境变量中的登录信息
+# 如果检测到程序在 Github Actions 内运行，那么读取环境变量中的邮箱密码
 # 在 Actions secrets中设置 EMAIL_KEY
 if os.environ.get('GITHUB_RUN_ID', None):
-	emailKey = EMAIL_KEY
+	emailKey = os.environ.get('EMAIL_KEY', '') 
 
 # 今天值日编号
 def calOrder(tot, yesterdayId=''):
