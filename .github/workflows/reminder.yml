@@ -47,7 +47,7 @@ jobs:
           username: zongeek@sina.com
           password: ${{ secrets.EMAIL_KEY }}
           subject: 【832睡眠体验研究中心重要通知】
-          body: file://reminder.py
+          body: file://message.txt
           to: file://mail.txt
           from: GitHub Actions
           content_type: text/html
