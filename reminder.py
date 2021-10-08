@@ -63,10 +63,12 @@ def saveFile(id):
 def autoRun():
 	yesterdayId = readFile()
 	index = calOrder(12, yesterdayId)
-	print(index, names[index])
-	# sendMsg(3)
+	# print(index, names[index])
+	
+	# 发送邮件提醒
+	sendMsg(index)
+	
 	# 保存今天信息
-
 	saveFile(ids[index])
 
 if __name__ == '__main__':
