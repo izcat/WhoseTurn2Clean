@@ -33,5 +33,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
+        env:
+          EMAIL_KEY: ${{secrets.EMAIL_KEY}}
         run: |
           python ./reminder.py
