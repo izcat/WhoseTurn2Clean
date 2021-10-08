@@ -48,6 +48,6 @@ jobs:
           password: ${{ secrets.EMAIL_KEY }}
           subject: 【832睡眠体验研究中心重要通知】
           body: file://message.txt
-          to: file://mail.txt
+          to: 1194148199@qq.com
           from: GitHub Actions
           convert_markdown: true
