@@ -9,7 +9,7 @@ class Mail:
 		self.mail = None
 
 	def send(self, Send, Recv, password, mailMsg, mailSub=''):
-		self.mail = MIMEText(mailMsg, 'html', 'utf-8')
+		self.mail = MIMEText(mailMsg)
 		self.mail['Subject'] = mailSub
 		self.mail['From'] = Send
 		self.mail['To'] = Recv
