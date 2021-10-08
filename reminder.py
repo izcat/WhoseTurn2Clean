@@ -14,6 +14,7 @@ emailKey = 'xxxxxxx'
 # 在 Actions secrets中设置 EMAIL_KEY
 if os.environ.get('GITHUB_RUN_ID', None):
 	emailKey = os.environ.get('EMAIL_KEY', '') 
+	print('emailKey:', emailKey)
 
 # 今天值日编号
 def calOrder(tot, yesterdayId=''):
