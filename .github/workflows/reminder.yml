@@ -50,4 +50,4 @@ jobs:
           body: file://message.txt
           to: file://mail.txt
           from: GitHub Actions
-          content_type: text/html
+          convert_markdown: true
