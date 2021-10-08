@@ -37,3 +37,17 @@ jobs:
           EMAIL_KEY: ${{secrets.EMAIL_KEY}}
         run: |
           python ./reminder.py
+      
+      # Python 中发邮件似乎被拦截了
+      - name: Send mail
+        uses: dawidd6/action-send-mail@master
+        with:
+          serveraddress: smtp.sina.com
+          serverport: 25
+          username: zongeek@sina.com
+          password: ${{ secrets.EMAIL_KEY }}
+          subject: 【832睡眠体验研究中心重要通知】
+          body: file://reminder.py
+          to: file://mail.txt
+          from: GitHub Actions
+          content_type: text/html
