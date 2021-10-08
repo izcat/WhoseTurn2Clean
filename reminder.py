@@ -39,6 +39,7 @@ def sendMsg(index):
 	msgEmail = "【饮茶小助手提示您】：今日卫生值班是%d号%s" % (idReminded, nameReminded)
 
 	email = Mail()
+	print(nameReminded, emailReminded, emailKey, msgEmail)
 	email.send('zongeek@sina.com', emailReminded, emailKey,
 					msgEmail, '【832睡眠体验研究中心重要通知】')
 
@@ -64,7 +65,7 @@ def saveFile(id):
 def autoRun():
 	yesterdayId = readFile()
 	index = calOrder(12, yesterdayId)
-	# print(index, names[index])
+	print(index, names[index])
 	
 	# 发送邮件提醒
 	sendMsg(index)
