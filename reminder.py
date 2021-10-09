@@ -41,10 +41,9 @@ def sendEmail(sender, mail_passwd, receiver, subject, msg):
         body['To'] = formataddr(["me", receiver])
         body['Subject'] = subject
 
-        global smtp_port, smtp_server
-        if smtp_server == "" or smtp_port == "":
-            smtp_port = 25
-            smtp_server = "smtp.sina.com"
+	smtp_port = 25
+	smtp_server = "smtp.sina.com"
+	
         smtp = smtplib.SMTP_SSL(smtp_server, smtp_port)
         smtp.login(sender, mail_passwd)
         smtp.sendmail(sender, receiver, body.as_string())
