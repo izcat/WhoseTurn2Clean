@@ -3,6 +3,7 @@ from datetime import datetime
 import smtplib
 from email.utils import formataddr
 from email.mime.text import MIMEText
+from emailsInfo import *
 
 ids = [item['id'] for item in allInfo]
 names = [item['name'] for item in allInfo]
