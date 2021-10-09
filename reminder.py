@@ -11,11 +11,13 @@ id_index = {allInfo[o]['id']:o for o in range(len(allInfo))}
 
 
 emailKey = 'xxxxxxx'
+wechatKey = ''
 # 如果检测到程序在 Github Actions 内运行，那么读取环境变量中的邮箱密码
 # 在 Actions secrets中设置 EMAIL_KEY
 if os.environ.get('GITHUB_RUN_ID', None):
 	emailKey = os.environ.get('EMAIL_KEY', '') 
-	print('emailKey:', emailKey)
+	wechatKey = os.environ.get('WECHAT_KEY', '') 
+	# print('emailKey:', emailKey)
 
 # 今天值日编号
 def calOrder(tot, yesterdayId=''):
@@ -45,12 +47,17 @@ def sendEmail(sender, mail_passwd, receiver, subject, msg):
 	
         smtp = smtplib.SMTP_SSL(smtp_server, smtp_port)
         smtp.login(sender, mail_passwd)
-        smtp.sendmail(sender, receiver.split(','), body.as_string())
+        smtp.sendmail(sender, receiver, body.as_string())
         smtp.quit()
         print("邮件发送成功")
     except Exception as ex:
         print("邮件发送失败")
         print(ex)
+	
+	# 微信通知发送失败
+	import requests
+	msg_url = "https://sctapi.ftqq.com/{}.send?text={}&desp={}".format(wechatKey, '今日值日提醒失败', repr(ex))
+	requests.get(msg_url)
 	
 def sendMsg(index):
 	idReminded = ids[index]
@@ -60,7 +67,7 @@ def sendMsg(index):
 	msgEmail = "【饮茶小助手提示您】：今日卫生值班是%d号%s" % (idReminded, nameReminded)
 
 	print(nameReminded, emailReminded, emailKey, msgEmail)
-	sendEmail('zongyc@foxmail.com', emailKey, emailReminded+',zongeek@sina.com',
+	sendEmail('zongyc@foxmail.com', emailKey, emailReminded,
 		  '【832睡眠体验研究中心重要通知】', msgEmail)
 
 
@@ -89,13 +96,15 @@ def autoRun():
 	
 	# 发送邮件提醒
 	sendMsg(index)
-	with open('message.txt', 'w') as f:
-		f.write("【饮茶小助手提示您】：今日卫生值班是%d号%s" % (ids[index], names[index]))
-	with open('mail.txt', 'w') as f:
-		f.write(emails[index])
+# 	with open('message.txt', 'w') as f:
+# 		f.write("【饮茶小助手提示您】：今日卫生值班是%d号%s" % (ids[index], names[index]))
+# 	with open('mail.txt', 'w') as f:
+# 		f.write(emails[index])
 	
 	# 保存今天信息
-	saveFile(ids[index])
+	# 无法直接保存仓库文件
+	# 因此 readFile 内容一直为空 待改进
+	# saveFile(ids[index])
 
 if __name__ == '__main__':
 	autoRun()
