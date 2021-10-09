@@ -1,7 +1,8 @@
 import os
 from datetime import datetime
-from myMail import Mail
-from emailsInfo import *
+import smtplib
+from email.utils import formataddr
+from email.mime.text import MIMEText
 
 ids = [item['id'] for item in allInfo]
 names = [item['name'] for item in allInfo]
@@ -32,6 +33,26 @@ def calOrder(tot, yesterdayId=''):
 
 	return index
 
+def sendEmail(sender, mail_passwd, receiver, subject, msg):
+    try:
+        body = MIMEText(str(msg), 'plain', 'utf-8')
+        body['From'] = formataddr(["notifier", sender])
+        body['To'] = formataddr(["me", receiver])
+        body['Subject'] = subject
+
+        global smtp_port, smtp_server
+        if smtp_server == "" or smtp_port == "":
+            smtp_port = 25
+            smtp_server = "smtp.sina.com"
+        smtp = smtplib.SMTP_SSL(smtp_server, smtp_port)
+        smtp.login(sender, mail_passwd)
+        smtp.sendmail(sender, receiver, body.as_string())
+        smtp.quit()
+        print("邮件发送成功")
+    except Exception as ex:
+        print("邮件发送失败")
+        print(ex)
+	
 def sendMsg(index):
 	idReminded = ids[index]
 	nameReminded = names[index]
@@ -39,10 +60,9 @@ def sendMsg(index):
 
 	msgEmail = "【饮茶小助手提示您】：今日卫生值班是%d号%s" % (idReminded, nameReminded)
 
-	email = Mail()
 	print(nameReminded, emailReminded, emailKey, msgEmail)
-	email.send('zongeek@sina.com', emailReminded, emailKey,
-					msgEmail, '【832睡眠体验研究中心重要通知】')
+	sendEmail('zongeek@sina.com', emailKey, emailReminded,
+		  '【832睡眠体验研究中心重要通知】', msgEmail)
 
 
 def readFile():
