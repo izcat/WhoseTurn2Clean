@@ -37,7 +37,7 @@ def sendEmail(sender, mail_passwd, receiver, subject, msg):
     try:
         body = MIMEText(str(msg), 'plain', 'utf-8')
         body['From'] = sender
-        body['To'] = receiver.split(',')
+        body['To'] = receiver
         body['Subject'] = subject
 
         smtp_port = 465 # or 587
@@ -45,7 +45,7 @@ def sendEmail(sender, mail_passwd, receiver, subject, msg):
 	
         smtp = smtplib.SMTP_SSL(smtp_server, smtp_port)
         smtp.login(sender, mail_passwd)
-        smtp.sendmail(sender, receiver, body.as_string())
+        smtp.sendmail(sender, receiver.split(','), body.as_string())
         smtp.quit()
         print("邮件发送成功")
     except Exception as ex:
