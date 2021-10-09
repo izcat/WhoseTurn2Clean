@@ -41,7 +41,7 @@ def sendEmail(sender, mail_passwd, receiver, subject, msg):
         body['To'] = formataddr(["me", receiver])
         body['Subject'] = subject
 
-        smtp_port = 25
+        smtp_port = 465 # or 587
         smtp_server = "smtp.sina.com"
 	
         smtp = smtplib.SMTP_SSL(smtp_server, smtp_port)
