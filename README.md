@@ -28,6 +28,25 @@ Github Actions 提供了CI/CD环境，配置好 `.github/workflows`下的 `*.yml
 
 ![image](https://user-images.githubusercontent.com/32667939/136580720-8bd2f0ee-a689-4490-a53a-0622afd2af03.png)
 
+
+## 踩坑记录
+- secrets 设置  
+  依次点击 Settings => Secrets => New repository secret  
+  填好 Name: YOUR_SECRET_NAME 和 Value  
+  务必在 `*.yml` 文件中的运行环境添加获取 secret  
+  ```
+  env:
+      SECRET_VALUE: ${{secrets.YOUR_SECRET_NAME}}
+  ```
+  在运行代码中，使用以下代码拿到设置的 Value  
+  ```
+  if os.environ.get('GITHUB_RUN_ID', None):
+	    SECRET_KEY = os.environ.get('SECRET_VALUE', '') 
+  ```
+- 邮件发送  
+  `smtplib.SMTP` 发送邮件可能会被 Github拦截，后台显示已发送，但接收人收不到邮件  
+  解决：
+  使用 `smtplib.SMTP_SSL` 加密方式发送，注意端口号修改为 465，根据不同邮箱服务器说明进行设置
 ---
 
 （完）
