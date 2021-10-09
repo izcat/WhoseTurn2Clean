@@ -26,7 +26,7 @@ Github Actions 提供了CI/CD环境，配置好 `.github/workflows`下的 `*.yml
 
 ## 代码运行过程
 
-![image](https://user-images.githubusercontent.com/32667939/136580720-8bd2f0ee-a689-4490-a53a-0622afd2af03.png)
+<img src="https://user-images.githubusercontent.com/32667939/136580720-8bd2f0ee-a689-4490-a53a-0622afd2af03.png" style="zoom:20%;" />
 
 
 ## 踩坑记录
@@ -44,9 +44,13 @@ Github Actions 提供了CI/CD环境，配置好 `.github/workflows`下的 `*.yml
 	    SECRET_KEY = os.environ.get('SECRET_VALUE', '') 
   ```
 - 邮件发送  
-  `smtplib.SMTP` 发送邮件可能会被 Github拦截，后台显示已发送，但接收人收不到邮件  
-  解决：
-  使用 `smtplib.SMTP_SSL` 加密方式发送，注意端口号修改为 465，根据不同邮箱服务器说明进行设置
+  ~~`smtplib.SMTP` 发送邮件可能会被 Github拦截，后台显示已发送，但接收人收不到邮件~~  
+  ~~使用 `smtplib.SMTP_SSL` 加密方式发送，注意端口号修改为 465，根据不同邮箱服务器说明进行设置~~  
+  问题：  
+  后台显示邮件发送成功，实际未投递到对方邮箱  
+  解决：  
+  更改发送协议（SSL）、改用 actions内封装的[接口](github.com/dawidd6/action-send-mail@master)均失败直到换QQ邮箱成功  
+  **垃圾新浪** 浪费我宝贵时间。。。
 ---
 
 （完）
