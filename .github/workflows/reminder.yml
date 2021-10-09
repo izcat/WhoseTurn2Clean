@@ -35,7 +35,10 @@ jobs:
       - name: Run a multi-line script
         env:
           EMAIL_KEY: ${{secrets.EMAIL_KEY}}
+          WECHAT_KEY: ${{secrets.WECHAT_KEY}}
         run: |
+          python -m pip install --upgrade pip
+          python -m pip install requests
           python ./reminder.py
       
       # ~~Python 中发邮件似乎被拦截了~~
