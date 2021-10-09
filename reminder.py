@@ -1,7 +1,6 @@
 import os
 from datetime import datetime
 import smtplib
-from email.utils import formataddr
 from email.mime.text import MIMEText
 from emailsInfo import *
 
@@ -37,12 +36,12 @@ def calOrder(tot, yesterdayId=''):
 def sendEmail(sender, mail_passwd, receiver, subject, msg):
     try:
         body = MIMEText(str(msg), 'plain', 'utf-8')
-        body['From'] = formataddr(["notifier", sender])
-        body['To'] = formataddr(["me", receiver])
+        body['From'] = sender
+        body['To'] = receiver.split(',')
         body['Subject'] = subject
 
         smtp_port = 465 # or 587
-        smtp_server = "smtp.sina.com"
+        smtp_server = "smtp.qq.com"
 	
         smtp = smtplib.SMTP_SSL(smtp_server, smtp_port)
         smtp.login(sender, mail_passwd)
@@ -61,7 +60,7 @@ def sendMsg(index):
 	msgEmail = "【饮茶小助手提示您】：今日卫生值班是%d号%s" % (idReminded, nameReminded)
 
 	print(nameReminded, emailReminded, emailKey, msgEmail)
-	sendEmail('zongeek@sina.com', emailKey, emailReminded,
+	sendEmail('zongyc@foxmail.com', emailKey, emailReminded+',zongeek@sina.com',
 		  '【832睡眠体验研究中心重要通知】', msgEmail)
 
 
