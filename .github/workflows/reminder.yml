@@ -43,7 +43,7 @@ jobs:
         uses: dawidd6/action-send-mail@master
         with:
           server_address: smtp.sina.com
-          server_port: 25
+          server_port: 465
           username: zongeek@sina.com
           password: ${{ secrets.EMAIL_KEY }}
           subject: 【值日通知】
