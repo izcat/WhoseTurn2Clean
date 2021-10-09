@@ -46,8 +46,8 @@ jobs:
           server_port: 25
           username: zongeek@sina.com
           password: ${{ secrets.EMAIL_KEY }}
-          subject: 【832睡眠体验研究中心重要通知】
+          subject: 【值日通知】
           body: file://message.txt
-          to: 1194148199@qq.com
+          to: de.ep@qq.com
           from: GitHub Actions
           convert_markdown: true
