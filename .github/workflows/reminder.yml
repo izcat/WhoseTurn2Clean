@@ -38,16 +38,18 @@ jobs:
         run: |
           python ./reminder.py
       
-      # Python 中发邮件似乎被拦截了
-      - name: Send mail
-        uses: dawidd6/action-send-mail@master
-        with:
-          server_address: smtp.qq.com
-          server_port: 465
-          username: zongyc@foxmail.com
-          password: ${{ secrets.EMAIL_KEY }}
-          subject: 【值日通知】
-          body: file://message.txt
-          to: zongeek@sina.com
-          from: GitHub Actions
-          convert_markdown: true
+      # ~~Python 中发邮件似乎被拦截了~~
+      # 已定位到问题 无法发出邮件是发件箱 新浪邮箱的锅
+      # 改用 腾讯邮箱没问题
+#       - name: Send mail
+#         uses: dawidd6/action-send-mail@master
+#         with:
+#           server_address: smtp.qq.com
+#           server_port: 465
+#           username: zongyc@foxmail.com
+#           password: ${{ secrets.EMAIL_KEY }}
+#           subject: 【值日通知】
+#           body: file://message.txt
+#           to: zongeek@sina.com
+#           from: GitHub Actions
+#           convert_markdown: true
