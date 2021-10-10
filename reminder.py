@@ -54,10 +54,10 @@ def sendEmail(sender, mail_passwd, receiver, subject, msg):
         print("邮件发送失败")
         print(ex)
 	
-	# 微信通知发送失败
-	import requests
-	msg_url = "https://sctapi.ftqq.com/{}.send?text={}&desp={}".format(wechatKey, '今日值日提醒失败', repr(ex))
-	requests.get(msg_url)
+        # 微信通知发送失败
+        import requests
+        msg_url = "https://sctapi.ftqq.com/{}.send?text={}&desp={}".format(wechatKey, '今日值日提醒失败', repr(ex))
+        requests.get(msg_url)
 	
 def sendMsg(index):
 	idReminded = ids[index]
