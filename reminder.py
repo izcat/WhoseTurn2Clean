@@ -9,6 +9,19 @@ names = [item['name'] for item in allInfo]
 emails = [item['email'] for item in allInfo]
 id_index = {allInfo[o]['id']:o for o in range(len(allInfo))}
 
+duties = ["套间清扫，拖地",
+		"洗手台清理，套间桌子清洁",
+		"卫生间垃圾扫除，洁厕灵清理",
+		"更换卫生间垃圾袋，卫生间和套间垃圾桶清洗",
+		"套间清扫，拖地",
+		"洗手台清理，套间桌子清洁",
+		"卫生间垃圾扫除，洁厕灵清理",
+		"更换卫生间垃圾袋，卫生间和套间垃圾桶清洗",
+		"套间清扫，拖地",
+		"洗手台清理，套间桌子清洁",
+		"卫生间垃圾扫除，洁厕灵清理",
+		"更换卫生间垃圾袋，卫生间和套间垃圾桶清洗"]
+duties = ["拖浴室、拖卫生间、更换套间垃圾袋、换水；"+item for item in duties]
 
 emailKey = 'xxxxxxx'
 wechatKey = ''
@@ -65,6 +78,7 @@ def sendMsg(index):
 	emailReminded = emails[index]
 
 	msgEmail = "【饮茶小助手提示您】：今日卫生值班是%d号%s" % (idReminded, nameReminded)
+	msgEmail += "\n【今日值日任务清单】：" + duties[index]
 
 	print(nameReminded, emailReminded, emailKey, msgEmail)
 	sendEmail('zongyc@foxmail.com', emailKey, emailReminded,
